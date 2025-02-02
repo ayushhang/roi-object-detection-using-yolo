@@ -1,8 +1,6 @@
 project_root/
 │
-├── requirements.txt
 ├── config.yaml
-├── README.md
 ├── main.py
 │
 ├── yolo_detector/
@@ -31,6 +29,4 @@ project_root/
 │
 └── tests/
     ├── __init__.py
-    ├── test_detector.py
-    ├── test_roi_handler.py
-    └── test_api_client.py
+    ├── unit_tests.py
