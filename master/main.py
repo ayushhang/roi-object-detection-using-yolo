@@ -1,6 +1,6 @@
 import cv2
 import logging
-from detector.core.detector import YOLOROIDetector
+from detector.core.obj_detector import YOLONDetector
 from detector.config.settings import Settings
 import platform
 
@@ -23,7 +23,7 @@ def main():
         logging.info(f"Running on {platform.system()} system")
         
         # Initialize the detector with settings from the configuration
-        detector = YOLOROIDetector(
+        detector = YOLONDetector(
             model_path=config.model_path,
             api_url=config.api_url,
             api_key=config.api_key

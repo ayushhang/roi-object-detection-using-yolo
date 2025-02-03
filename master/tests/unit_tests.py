@@ -3,12 +3,12 @@ from unittest.mock import patch, MagicMock
 from datetime import datetime
 import random
 import string
-from detector.core.detector import YOLOROIDetector
+from detector.core.detector import YOLONDetector
 
 class TestYOLOROIDetector(unittest.TestCase):
     
     def setUp(self):
-        self.detector = YOLOROIDetector(model_path='yolov8n.pt', api_url='http://your-mongodb-api-url', api_key='your-api-key')
+        self.detector = YOLONDetector(model_path='yolov8n.pt', api_url='http://your-mongodb-api-url', api_key='your-api-key')
 
     # Test generate_unique_id method
     def test_generate_unique_id(self):

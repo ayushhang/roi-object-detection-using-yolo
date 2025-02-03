@@ -40,7 +40,7 @@ This project implements a **real-time object detection system** using **YOLOv8**
 
 **Execute these lines on the terminal**
 ```bash
-pip install opencv-python numpy ultralytics requests geocoder pydantic
+pip install opencv-python numpy ultralytics requests geocoder
 ```
 
 ---
