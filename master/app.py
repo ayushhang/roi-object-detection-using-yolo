@@ -1,11 +1,18 @@
 import tkinter as tk
 from tkinter import messagebox
 import threading
+from typing import Self
 import cv2
 import logging
 from PIL import Image, ImageTk
-from detector.core.detector import YOLONDetector
+from detector.core.obj_detector import YOLONDetector
 from detector.config.settings import Settings
+from detector.utils.camera import Camera
+from detector.utils.geocoding import Geocoder
+from detector.utils.id_generator import IDGenerator
+from detector.api.client import APIClient
+from detector.core.roi_handler import ROIHandler
+from detector.core.frame_processor import FrameProcessor
 
 # Set up logging
 logging.basicConfig(
@@ -30,14 +37,14 @@ def start_detection():
         config = Settings()
 
         # Initialize the detector with the configuration
-        detector = detector(
+        detector = YOLONDetector(
             model_path=config.model_path,
             api_url=config.api_url,
             api_key=config.api_key
         )
         
         logging.info("Starting the object detection loop...")
-        detector.run()  # Start detection loop
+        YOLONDetector.run(Self)  # Start detection loop
         is_running = True
         update_status("Detection is running...")
 
@@ -46,7 +53,7 @@ def stop_detection():
     global detector, is_running
     if is_running:
         logging.info("Stopping the detection...")
-        detector.cap.release()  # Stop the camera capture
+        YOLONDetector.cap.release()  # Stop the camera capture
         cv2.destroyAllWindows()  # Close any OpenCV windows
         is_running = False
         update_status("Detection stopped.")
@@ -79,12 +86,12 @@ def open_camera_feed():
         
         while is_running:
             # Capture frame from the camera
-            ret, frame = detector.cap.read()
+            ret, frame = YOLONDetector.cap.read()
             if not ret:
                 break
             
             # Process the frame
-            processed_frame = detector.process_frame(frame)
+            processed_frame = FrameProcessor.process_frame(frame)
 
             # Draw ROI if it exists
             if roi is not None:

@@ -1,4 +1,4 @@
-from .detector import YOLONDetector
+from .obj_detector import YOLONDetector
 from .roi_handler import ROIHandler
 from .frame_processor import FrameProcessor
 
